@@ -1,4 +1,6 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 public class Main {
@@ -21,6 +23,9 @@ public class Main {
                         case 3:
                             getTasksForDay(scanner, diary);
                             break;
+                        case 4:
+                            printTasks(diary);
+                            break;
                         case 0:
                             break label;
                     }
@@ -39,35 +44,37 @@ public class Main {
         String taskDescription = scanner.next();
         System.out.println("Выберите тип задачи: ");
         System.out.println(
-                """
-                        P - личная,
-                        W - рабочая,
-                        """);
+
+                        "P - личная" + '\n' +
+                        "W - рабочая"
+                        );
         TypeTask typeTask = TypeTask.valueOf(scanner.next());
         System.out.println("Введите дату и время в формате год-месяц-день час:мин : ");
-        LocalDateTime dateTime = LocalDateTime.parse(scanner.next());
+        LocalDate dateTask = LocalDate.parse(scanner.next());
+        LocalTime timeTask = LocalTime.parse(scanner.next());
+        LocalDateTime startTime = LocalDateTime.of(dateTask, timeTask);
         System.out.println("Укажите повторяемость задачи: ");
         System.out.println(
-                """
-                        1 - не повторяется,
-                        2 - через день,
-                        3 - через неделю,
-                        4 - через месяц,
-                        5 - через год.
-                        """);
+
+                        "1 - не повторяется" + '\n' +
+                        "2 - через день" + '\n' +
+                        "3 - через неделю" + '\n' +
+                        "4 - через месяц" + '\n' +
+                        "5 - через год"
+                        );
         int typeRepeat = scanner.nextInt();
 
         switch (typeRepeat) {
             case 1:
-                diary.addTask(new OneTime(taskName, taskDescription, typeTask, dateTime)); break;
+                diary.addTask(new OneTime(taskName, taskDescription, typeTask, startTime)); break;
             case 2:
-                diary.addTask(new EveryDay(taskName, taskDescription, typeTask, dateTime)); break;
+                diary.addTask(new EveryDay(taskName, taskDescription, typeTask, startTime)); break;
             case 3:
-                diary.addTask(new EveryWeek(taskName, taskDescription, typeTask, dateTime)); break;
+                diary.addTask(new EveryWeek(taskName, taskDescription, typeTask, startTime)); break;
             case 4:
-                diary.addTask(new EveryMonth(taskName, taskDescription, typeTask, dateTime)); break;
+                diary.addTask(new EveryMonth(taskName, taskDescription, typeTask, startTime)); break;
             case 5:
-                diary.addTask(new EveryYear(taskName, taskDescription, typeTask, dateTime)); break;
+                diary.addTask(new EveryYear(taskName, taskDescription, typeTask, startTime)); break;
         }
     }
 
@@ -77,20 +84,25 @@ public class Main {
         diary.deleteTask(idTask);
     }
 
+    private static void printTasks(TaskService diary) {
+        diary.printAllTasks();
+    }
+
     private static void getTasksForDay(Scanner scanner, TaskService diary) {
-        System.out.println("Укажите день, на который вы хотите получить список задачь в формате: год-месяц-день час:мин : ");
-        LocalDateTime date = LocalDateTime.parse(scanner.next());
+        System.out.println("Укажите день, на который вы хотите получить список задачь в формате: год-месяц-день : ");
+        LocalDate date = LocalDate.parse(scanner.next());
         diary.printTasksForDay(date);
     }
 
     private static void printMenu() {
         System.out.println(
-                """
-                        1. Добавить задачу
-                        2. Удалить задачу
-                        3. Получить задачу на указанный день
-                        0. Выход
-                        """
+
+                        "1. Добавить задачу" + '\n' +
+                        "2. Удалить задачу" + '\n' +
+                        "3. Получить задачу на указанный день" + '\n' +
+                        "4. Получить все задачи"  + '\n' +
+                        "0. Выход"
+
         );
     }
 }
