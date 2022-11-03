@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class OneTime extends Task implements Repeatable {
@@ -9,6 +10,11 @@ public class OneTime extends Task implements Repeatable {
     @Override
     public LocalDateTime repeatable() {
         return getDateOfTask();
+    }
+
+    @Override
+    public boolean appearsIn(LocalDate date) {
+        return (date.isEqual(getDateOfTask().toLocalDate()));
     }
 
     @Override

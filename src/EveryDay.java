@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class EveryDay extends Task implements Repeatable {
@@ -13,6 +14,11 @@ public class EveryDay extends Task implements Repeatable {
     @Override
     public LocalDateTime repeatable() {
         return getDateOfTask().plusDays(1);
+    }
+
+    @Override
+    public boolean appearsIn(LocalDate date) {
+        return (date.isEqual(getDateOfTask().toLocalDate()) || date.isAfter(getDateOfTask().toLocalDate()));
     }
 
     @Override

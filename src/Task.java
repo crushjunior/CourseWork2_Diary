@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -26,11 +27,12 @@ public abstract class Task {
 
     public void setName(String name) throws WrongDataException{
         if (name == null || name.isBlank()) {
-            try {
-                throw new WrongDataException("Заголовок заполнен не корректно!");
-            } catch (WrongDataException e) {
-                System.out.println(e.getMessage());
-            }
+            throw new WrongDataException("Заголовок заполнен не корректно!");
+//            try {
+//                throw new WrongDataException("Заголовок заполнен не корректно!");
+//            } catch (WrongDataException e) {
+//                System.out.println(e.getMessage());
+//            }
         } else {
             this.name = name;
         }
@@ -38,11 +40,7 @@ public abstract class Task {
 
     public void setDescription(String description) throws WrongDataException{
         if (description == null || description.isBlank()) {
-            try {
-                throw new WrongDataException("Описание заполнено не корректно!");
-            } catch (WrongDataException e) {
-                System.out.println(e.getMessage());
-            }
+            throw new WrongDataException("Описание заполнено не корректно!");
         } else {
             this.description = description;
         }
@@ -50,11 +48,7 @@ public abstract class Task {
 
     public void setTypeTask(TypeTask typeTask) throws WrongDataException{
         if (typeTask == null) {
-            try {
-                throw new WrongDataException("Укажите тип задачи!");
-            } catch (WrongDataException e) {
-                System.out.println(e.getMessage());
-            }
+            throw new WrongDataException("Укажите тип задачи!");
         } else {
             this.typeTask = typeTask;
         }
@@ -111,4 +105,8 @@ public abstract class Task {
     }
 
     public abstract  LocalDateTime repeatable();
+
+    public abstract boolean appearsIn(LocalDate date);
 }
+
+

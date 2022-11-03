@@ -66,15 +66,35 @@ public class Main {
 
         switch (typeRepeat) {
             case 1:
-                diary.addTask(new OneTime(taskName, taskDescription, typeTask, startTime)); break;
+                try {
+                    diary.addTask(new OneTime(taskName, taskDescription, typeTask, startTime)); break;
+                } catch (WrongDataException e) {
+                System.out.println(e.getMessage());
+            }
             case 2:
-                diary.addTask(new EveryDay(taskName, taskDescription, typeTask, startTime)); break;
+                try {
+                    diary.addTask(new EveryDay(taskName, taskDescription, typeTask, startTime)); break;
+                } catch (WrongDataException e) {
+                    System.out.println(e.getMessage());
+                }
             case 3:
-                diary.addTask(new EveryWeek(taskName, taskDescription, typeTask, startTime)); break;
+                try {
+                    diary.addTask(new EveryWeek(taskName, taskDescription, typeTask, startTime)); break;
+                } catch (WrongDataException e) {
+                    System.out.println(e.getMessage());
+                }
             case 4:
-                diary.addTask(new EveryMonth(taskName, taskDescription, typeTask, startTime)); break;
+                try {
+                    diary.addTask(new EveryMonth(taskName, taskDescription, typeTask, startTime)); break;
+                } catch (WrongDataException e) {
+                    System.out.println(e.getMessage());
+                }
             case 5:
-                diary.addTask(new EveryYear(taskName, taskDescription, typeTask, startTime)); break;
+                try {
+                    diary.addTask(new EveryYear(taskName, taskDescription, typeTask, startTime)); break;
+                } catch (WrongDataException e) {
+                    System.out.println(e.getMessage());
+                }
         }
     }
 

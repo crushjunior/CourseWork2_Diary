@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class EveryYear extends Task implements Repeatable {
@@ -9,6 +10,11 @@ public class EveryYear extends Task implements Repeatable {
     @Override
     public LocalDateTime repeatable() {
         return getDateOfTask().plusYears(1);
+    }
+
+    @Override
+    public boolean appearsIn(LocalDate date) {
+        return (date.isEqual(getDateOfTask().toLocalDate()) || date.isAfter(getDateOfTask().toLocalDate()) && date.getDayOfYear() == getDateOfTask().getDayOfYear());
     }
 
     @Override

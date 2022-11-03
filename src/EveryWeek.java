@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class EveryWeek extends Task implements Repeatable {
@@ -10,6 +11,11 @@ public class EveryWeek extends Task implements Repeatable {
     @Override
     public LocalDateTime repeatable() {
         return getDateOfTask().plusWeeks(1);
+    }
+
+    @Override
+    public boolean appearsIn(LocalDate date) {
+        return (date.isEqual(getDateOfTask().toLocalDate()) || date.isAfter(getDateOfTask().toLocalDate()) && date.getDayOfWeek() == getDateOfTask().getDayOfWeek());
     }
 
     @Override
