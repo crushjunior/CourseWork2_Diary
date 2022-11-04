@@ -9,10 +9,9 @@ public abstract class Task {
     private String description;
     private TypeTask typeTask;
     private final LocalDateTime dateOfTask;
-    private int typeRepeat;
+
 
     public Task(String name, String description, TypeTask typeTask, LocalDateTime dateOfTask) throws WrongDataException {
-        this.typeRepeat = 0;
         this.id = countId++;
         setName(name);
         setDescription(description);
@@ -28,11 +27,6 @@ public abstract class Task {
     public void setName(String name) throws WrongDataException{
         if (name == null || name.isBlank()) {
             throw new WrongDataException("Заголовок заполнен не корректно!");
-//            try {
-//                throw new WrongDataException("Заголовок заполнен не корректно!");
-//            } catch (WrongDataException e) {
-//                System.out.println(e.getMessage());
-//            }
         } else {
             this.name = name;
         }
@@ -54,13 +48,6 @@ public abstract class Task {
         }
     }
 
-    public void setTypeRepeat(int typeRepeat) {
-        this.typeRepeat = typeRepeat;
-    }
-
-    public int getTypeRepeat() {
-        return typeRepeat;
-    }
 
     public int getId() {
         return id;
@@ -103,8 +90,6 @@ public abstract class Task {
                 ", тип: " + typeTask +
                 ", дата создания: " + dateOfTask;
     }
-
-    public abstract  LocalDateTime repeatable();
 
     public abstract boolean appearsIn(LocalDate date);
 }

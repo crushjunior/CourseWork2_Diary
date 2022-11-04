@@ -1,5 +1,6 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public interface Repeatable {
-    LocalDateTime repeatable();
+    boolean appearsIn(LocalDate date);
 }

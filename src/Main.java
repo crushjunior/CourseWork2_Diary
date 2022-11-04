@@ -4,7 +4,7 @@ import java.time.LocalTime;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws WrongDataException {
+    public static void main(String[] args)  {
         TaskService diary = new TaskService();
         try (Scanner scanner = new Scanner(System.in)) {
             label:
@@ -37,7 +37,7 @@ public class Main {
         }
     }
 
-    private static void inputTask(Scanner scanner, TaskService diary) throws WrongDataException {
+    private static void inputTask(Scanner scanner, TaskService diary) {
         System.out.println("Введите название задачи: ");
         String taskName = scanner.next();
         System.out.println("Введите описание задачи: ");
